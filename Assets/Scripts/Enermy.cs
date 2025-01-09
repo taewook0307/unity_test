@@ -47,6 +47,7 @@ public class Enermy : MonoBehaviour
         Vector3 runVector = (myPosition - targetPositionn).normalized;
         Vector3 moveVector = runVector * moveSpeed * Time.fixedDeltaTime;
 
+        velocity = runVector;
         transform.position += moveVector;
     }
 
