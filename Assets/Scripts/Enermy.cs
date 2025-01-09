@@ -71,7 +71,7 @@ public class Enermy : MonoBehaviour
         {
             velocity = GetRandomVelocity();
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(RandomTimer);
         }
     }
 
@@ -83,6 +83,9 @@ public class Enermy : MonoBehaviour
 
     [SerializeField]
     private float moveSpeed = 2f;
+
+    [SerializeField]
+    private float RandomTimer = 1f;
 
     private Vector3 velocity;
 }
