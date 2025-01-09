@@ -15,4 +15,25 @@ public class Enermy : MonoBehaviour
     {
         
     }
+
+    private void FixedUpdate()
+    {
+        float distance = (target.transform.position - transform.position).magnitude;
+
+        if(distance < traceDistance)
+        {
+            RunAway();
+        }
+    }
+
+    void RunAway()
+    {
+
+    }
+
+    [SerializeField]
+    GameObject target;
+
+    [SerializeField]
+    float traceDistance = 1f;
 }

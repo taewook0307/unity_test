@@ -18,7 +18,7 @@ public class Camera : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position
+        // transform.position
     }
 
     [SerializeField]
