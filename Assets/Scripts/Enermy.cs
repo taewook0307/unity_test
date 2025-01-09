@@ -28,7 +28,10 @@ public class Enermy : MonoBehaviour
 
     void RunAway()
     {
+        Vector3 runVector = (transform.position - target.transform.position).normalized;
+        Vector3 moveVector = runVector * moveSpeed * Time.fixedDeltaTime;
 
+        transform.position += moveVector;
     }
 
     [SerializeField]
@@ -36,4 +39,7 @@ public class Enermy : MonoBehaviour
 
     [SerializeField]
     float traceDistance = 1f;
+
+    [SerializeField]
+    float moveSpeed = 2f;
 }
