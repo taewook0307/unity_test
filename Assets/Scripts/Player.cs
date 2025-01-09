@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         Vector3 dirVector = new Vector3(x, y, 0).normalized;
-        Vector3 moveVector = dirVector * moveSpeed * Time.deltaTime;
+        Vector3 moveVector = dirVector * moveSpeed * Time.fixedDeltaTime;
 
         transform.position += moveVector;
     }
