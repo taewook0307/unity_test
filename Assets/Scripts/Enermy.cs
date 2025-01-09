@@ -7,7 +7,8 @@ public class Enermy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Random.InitState(System.Guid.NewGuid().GetHashCode());
+        StartCoroutine(UpdateVelocity());
     }
 
     // Update is called once per frame
@@ -18,28 +19,70 @@ public class Enermy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float distance = (target.transform.position - transform.position).magnitude;
+        Vector3 myPosition = transform.position;
+        Vector3 targetPositionn = target.transform.position;
+
+        myPosition.z = 0;
+        targetPositionn.z = 0;
+        float distance = (targetPositionn - myPosition).magnitude;
 
         if(distance < traceDistance)
         {
             RunAway();
         }
+        else
+        {
+            RandomMove();
+        }
     }
 
     void RunAway()
     {
-        Vector3 runVector = (transform.position - target.transform.position).normalized;
+        Vector3 myPosition = transform.position;
+        Vector3 targetPositionn = target.transform.position;
+
+        myPosition.z = 0;
+        targetPositionn.z = 0;
+
+        Vector3 runVector = (myPosition - targetPositionn).normalized;
         Vector3 moveVector = runVector * moveSpeed * Time.fixedDeltaTime;
 
         transform.position += moveVector;
     }
 
-    [SerializeField]
-    GameObject target;
+    Vector3 GetRandomVelocity()
+    {
+        float dirX = Random.Range(-1f, 1f);
+        float dirY = Random.Range(-1f, 1f);
+
+        Vector3 returnValue = new Vector3(dirX, dirY, 0).normalized;
+        return returnValue;
+    }
+
+    void RandomMove()
+    {
+        Vector3 moveVector = velocity * moveSpeed * Time.fixedDeltaTime;
+        transform.position += moveVector;
+    }
+
+    IEnumerator UpdateVelocity()
+    {
+        while(true)
+        {
+            velocity = GetRandomVelocity();
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     [SerializeField]
-    float traceDistance = 1f;
+    private GameObject target;
 
     [SerializeField]
-    float moveSpeed = 2f;
+    private float traceDistance = 1f;
+
+    [SerializeField]
+    private float moveSpeed = 2f;
+
+    private Vector3 velocity;
 }
