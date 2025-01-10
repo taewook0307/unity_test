@@ -19,12 +19,22 @@ public class MapData : MonoBehaviour
         return mapRenderer.bounds.size;
     }
 
+    internal float GetHalfMapSizeX()
+    {
+        return mapRenderer.bounds.size.x / 2f;
+    }
+
+    internal float GetHalfMapSizeY()
+    {
+        return mapRenderer.bounds.size.y / 2f;
+    }
+
     internal Vector3 IsOut(Vector3 _checkVector)
     {
         Vector3 returnVector = _checkVector;
 
-        float halfX = GetMapSize().x / 2;
-        float halfY = GetMapSize().y / 2;
+        float halfX = GetHalfMapSizeX();
+        float halfY = GetHalfMapSizeY();
 
         if (returnVector.x < -halfX)
         {

@@ -66,6 +66,21 @@ public class Enemy : MonoBehaviour
         Vector3 moveVector = velocity * moveSpeed * Time.fixedDeltaTime;
         Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
         transform.position = newVector;
+
+        IsMapLine();
+    }
+
+    void IsMapLine()
+    {
+        if (Mathf.Abs(transform.position.x - curMapData.GetHalfMapSizeX()) < 0.1f)
+        {
+            velocity.y *= -1;
+        }
+
+        if (Mathf.Abs(transform.position.y - curMapData.GetHalfMapSizeY()) < 0.1f)
+        {
+            velocity.x *= -1;
+        }
     }
 
     IEnumerator UpdateVelocity()
