@@ -7,6 +7,7 @@ public class Enermy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        curMapData = FindAnyObjectByType<MapData>();
         Random.InitState(System.Guid.NewGuid().GetHashCode());
         StartCoroutine(UpdateVelocity());
     }
@@ -48,7 +49,9 @@ public class Enermy : MonoBehaviour
         Vector3 moveVector = runVector * moveSpeed * Time.fixedDeltaTime;
 
         velocity = runVector;
-        transform.position += moveVector;
+        
+        Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
+        transform.position = newVector;
     }
 
     Vector3 GetRandomVelocity()
@@ -63,7 +66,8 @@ public class Enermy : MonoBehaviour
     void RandomMove()
     {
         Vector3 moveVector = velocity * moveSpeed * Time.fixedDeltaTime;
-        transform.position += moveVector;
+        Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
+        transform.position = newVector;
     }
 
     IEnumerator UpdateVelocity()
@@ -75,6 +79,8 @@ public class Enermy : MonoBehaviour
             yield return new WaitForSeconds(RandomTimer);
         }
     }
+
+    private MapData curMapData;
 
     [SerializeField]
     private GameObject target;
