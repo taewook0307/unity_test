@@ -5,7 +5,6 @@ public class Enemy : MonoBehaviour
 {
     void Start()
     {
-        curMapData = FindAnyObjectByType<MapData>();
         Random.InitState(System.Guid.NewGuid().GetHashCode());
         StartCoroutine(UpdateVelocity());
     }
@@ -48,7 +47,7 @@ public class Enemy : MonoBehaviour
 
         velocity = runVector;
 
-        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
+        Vector3 newVector = transform.position + moveVector;
         transform.position = newVector;
     }
 
@@ -64,21 +63,8 @@ public class Enemy : MonoBehaviour
     void RandomMove()
     {
         Vector3 moveVector = velocity * moveSpeed * Time.fixedDeltaTime;
-        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
+        Vector3 newVector = transform.position + moveVector;
         transform.position = newVector;
-    }
-
-    void IsMapLine()
-    {
-        if (Mathf.Abs(transform.position.x - curMapData.GetHalfMapSizeX()) < 0.1f)
-        {
-            velocity.y *= -1;
-        }
-
-        if (Mathf.Abs(transform.position.y - curMapData.GetHalfMapSizeY()) < 0.1f)
-        {
-            velocity.x *= -1;
-        }
     }
 
     IEnumerator UpdateVelocity()
@@ -90,8 +76,6 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(RandomTimer);
         }
     }
-
-    private MapData curMapData;
 
     [SerializeField]
     private GameObject target;

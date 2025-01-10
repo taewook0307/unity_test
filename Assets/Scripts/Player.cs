@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curMapData = FindAnyObjectByType<MapData>();
+
     }
 
     // Update is called once per frame
@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    private MapData curMapData;
-
     [SerializeField]
     private float moveSpeed;
 
@@ -34,7 +32,7 @@ public class Player : MonoBehaviour
         Vector3 dirVector = new Vector3(x, y, 0).normalized;
         Vector3 moveVector = dirVector * moveSpeed * Time.fixedDeltaTime;
 
-        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
+        Vector3 newVector = transform.position + moveVector;
 
         transform.position = newVector;
     }
