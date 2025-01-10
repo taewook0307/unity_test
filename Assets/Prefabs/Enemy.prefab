@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 3836879452063443719}
   - component: {fileID: 7944772470757179477}
   - component: {fileID: 4833566716865263783}
-  - component: {fileID: 2128209144543660902}
-  - component: {fileID: 2523077645422972565}
+  - component: {fileID: 6625621009468940931}
   m_Layer: 0
-  m_Name: Enermy
+  m_Name: Enemy
   m_TagString: Enermy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,34 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.27, y: 0.22}
   m_EdgeRadius: 0
---- !u!50 &2128209144543660902
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667276550224854595}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &2523077645422972565
+--- !u!114 &6625621009468940931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +144,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 667276550224854595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1665719242dd064fb81ba0561bb6a0d, type: 3}
+  m_Script: {fileID: 11500000, guid: af1a6e5c61c63ec4d8cc5157efae4082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  traceDistance: 1
-  moveSpeed: 2
-  RandomTimer: 1

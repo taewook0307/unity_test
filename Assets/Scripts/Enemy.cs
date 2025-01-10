@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Enermy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         curMapData = FindAnyObjectByType<MapData>();
@@ -15,7 +13,7 @@ public class Enermy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -27,7 +25,7 @@ public class Enermy : MonoBehaviour
         targetPositionn.z = 0;
         float distance = (targetPositionn - myPosition).magnitude;
 
-        if(distance < traceDistance)
+        if (distance < traceDistance)
         {
             RunAway();
         }
@@ -49,7 +47,7 @@ public class Enermy : MonoBehaviour
         Vector3 moveVector = runVector * moveSpeed * Time.fixedDeltaTime;
 
         velocity = runVector;
-        
+
         Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
         transform.position = newVector;
     }
@@ -72,7 +70,7 @@ public class Enermy : MonoBehaviour
 
     IEnumerator UpdateVelocity()
     {
-        while(true)
+        while (true)
         {
             velocity = GetRandomVelocity();
 

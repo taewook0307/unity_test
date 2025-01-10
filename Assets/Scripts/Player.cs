@@ -38,4 +38,12 @@ public class Player : MonoBehaviour
 
         transform.position = newVector;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (true == collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
 }
