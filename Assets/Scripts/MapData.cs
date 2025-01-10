@@ -29,7 +29,21 @@ public class MapData : MonoBehaviour
         return mapRenderer.bounds.size.y / 2f;
     }
 
-    internal Vector3 IsOut(Vector3 _checkVector)
+    internal bool IsMapNear(Vector3 _checkVector)
+    {
+        float halfX = GetHalfMapSizeX();
+        float halfY = GetHalfMapSizeY();
+
+        if (Mathf.Abs(_checkVector.x - halfX) < 0.1f
+            || Mathf.Abs(_checkVector.y - halfY) < 0.1f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    internal Vector3 BlockMapOut(Vector3 _checkVector)
     {
         Vector3 returnVector = _checkVector;
 

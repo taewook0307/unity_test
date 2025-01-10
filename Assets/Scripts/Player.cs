@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         Vector3 dirVector = new Vector3(x, y, 0).normalized;
         Vector3 moveVector = dirVector * moveSpeed * Time.fixedDeltaTime;
 
-        Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
+        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
 
         transform.position = newVector;
     }

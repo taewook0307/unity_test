@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
         velocity = runVector;
 
-        Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
+        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
         transform.position = newVector;
     }
 
@@ -64,10 +64,8 @@ public class Enemy : MonoBehaviour
     void RandomMove()
     {
         Vector3 moveVector = velocity * moveSpeed * Time.fixedDeltaTime;
-        Vector3 newVector = curMapData.IsOut(transform.position + moveVector);
+        Vector3 newVector = curMapData.BlockMapOut(transform.position + moveVector);
         transform.position = newVector;
-
-        IsMapLine();
     }
 
     void IsMapLine()
