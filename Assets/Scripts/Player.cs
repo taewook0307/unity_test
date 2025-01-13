@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,7 +8,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        collectionCount = 5;
+        collections.Capacity = collectionCount;
     }
 
     // Update is called once per frame
@@ -21,6 +23,15 @@ public class Player : MonoBehaviour
         Move();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (true == collision.gameObject.CompareTag("Enemy"))
+        {
+            CollectMonster(collision.gameObject);
+        }
+    }
+
+    #region Move
     [SerializeField]
     private float moveSpeed;
 
@@ -36,12 +47,52 @@ public class Player : MonoBehaviour
 
         transform.position = newVector;
     }
+    #endregion
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    #region Collection
+    private List<GameObject> collections = new List<GameObject>();
+
+    private float blankHeight = 0.5f;
+    private int collectionCount = 5;
+
+    private void CollectMonster(GameObject monster)
     {
-        if (true == collision.gameObject.CompareTag("Enemy"))
+        if(collectionCount <= collections.Count)
         {
-            collision.gameObject.SetActive(false);
+            return;
+        }
+
+        SpriteRenderer monsterRenderer = monster.GetComponent<SpriteRenderer>();
+
+        if (null != monsterRenderer)
+        {
+            GameObject rendererObject = new GameObject("CollectionRenderer");
+            SpriteRenderer newRenderer = rendererObject.AddComponent<SpriteRenderer>();
+            newRenderer.sprite = monsterRenderer.sprite;
+            newRenderer.material = monsterRenderer.material;
+            newRenderer.enabled = true;
+
+            collections.Add(rendererObject);
+
+            UpdateRendererPositions();
+
+            monster.SetActive(false);
         }
     }
+
+    private void UpdateRendererPositions()
+    {
+        BoxCollider2D playerCollider = GetComponent<BoxCollider2D>();
+
+        Vector3 basePosition = transform.position + Vector3.up * (playerCollider.bounds.size.y / 2);
+
+        for (int i = 0; i < collections.Count; i++)
+        {
+            Vector3 newPosition = basePosition + Vector3.up * (blankHeight * (i + 1));
+            collections[i].transform.position = newPosition;
+            collections[i].transform.SetParent(transform);
+        }
+    }
+
+    #endregion
 }
