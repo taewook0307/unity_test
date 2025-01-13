@@ -86,11 +86,17 @@ public class Player : MonoBehaviour
 
         Vector3 basePosition = transform.position + Vector3.up * (playerCollider.bounds.size.y / 2);
 
-        for (int i = 0; i < collections.Count; i++)
+        if(collections.Count == 1)
         {
-            Vector3 newPosition = basePosition + Vector3.up * (blankHeight * (i + 1));
-            collections[i].transform.position = newPosition;
-            collections[i].transform.SetParent(transform);
+            Vector3 newPosition = basePosition + Vector3.up * blankHeight;
+            collections[0].transform.position = newPosition;
+            collections[0].transform.SetParent(transform);
+        }
+        else
+        {
+            Vector3 newPosition = collections[collections.Count - 2].transform.position + Vector3.up * blankHeight;
+            collections[collections.Count - 1].transform.position = newPosition;
+            collections[collections.Count - 1].transform.SetParent(transform);
         }
     }
 
