@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -28,6 +29,14 @@ public class Player : MonoBehaviour
         if (true == collision.gameObject.CompareTag("Enemy"))
         {
             CollectMonster(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (true == collision.gameObject.CompareTag("Mixer"))
+        {
+            ChangeJuice();
         }
     }
 
@@ -89,15 +98,24 @@ public class Player : MonoBehaviour
         if(collections.Count == 1)
         {
             Vector3 newPosition = basePosition + Vector3.up * blankHeight;
+            newPosition.z = 0;
             collections[0].transform.position = newPosition;
             collections[0].transform.SetParent(transform);
         }
         else
         {
-            Vector3 newPosition = collections[collections.Count - 2].transform.position + Vector3.up * blankHeight;
+            GameObject prevObject = collections[collections.Count - 2];
+            SpriteRenderer prevRenderer = prevObject.GetComponent<SpriteRenderer>();
+            Vector3 newPosition = collections[collections.Count - 2].transform.position + Vector3.up * (prevRenderer.size.y / 2 + blankHeight);
+            newPosition.z = 0;
             collections[collections.Count - 1].transform.position = newPosition;
             collections[collections.Count - 1].transform.SetParent(transform);
         }
+    }
+
+    private void ChangeJuice()
+    {
+        Debug.Log("Change Juice");
     }
 
     #endregion
